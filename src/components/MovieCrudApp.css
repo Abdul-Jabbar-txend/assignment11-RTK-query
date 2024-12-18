@@ -1,0 +1,139 @@
+:root {
+  --primary-color: #3498db;
+  --secondary-color: #2ecc71;
+  --background-color: #f5f7fa;
+  --text-color: #2c3e50;
+  --error-color: #e74c3c;
+  --border-radius: 8px;
+  --transition-speed: 0.3s;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  line-height: 1.6;
+}
+
+.movie-app {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #ffffff;
+  border-radius: var(--border-radius);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  color: black;
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.input-container {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+input[type="text"] {
+  flex-grow: 1;
+  padding: 0.75rem;
+  font-size: 1rem;
+  border: 2px solid #e0e0e0;
+  border-radius: var(--border-radius);
+  transition: border-color var(--transition-speed);
+}
+
+input[type="text"]:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+button {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #ffffff;
+  background-color: var(--primary-color);
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: background-color var(--transition-speed);
+}
+
+button:hover {
+  background-color: #2980b9;
+}
+
+button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.5);
+}
+
+.movie-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.movie-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  background-color: #f8f9fa;
+  border-radius: var(--border-radius);
+  transition: transform var(--transition-speed);
+}
+
+.movie-item:hover {
+  transform: translateY(-2px);
+}
+
+.movie-name {
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.button-group {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.edit-button {
+  background-color: var(--secondary-color);
+}
+
+.edit-button:hover {
+  background-color: #27ae60;
+}
+
+.delete-button {
+  background-color: var(--error-color);
+}
+
+.delete-button:hover {
+  background-color: #c0392b;
+}
+
+.no-movies {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #7f8c8d;
+  margin-top: 2rem;
+}
+
+@media (max-width: 600px) {
+  .movie-app {
+    padding: 1rem;
+  }
+
+  .input-container {
+    flex-direction: column;
+  }
+
+  button {
+    width: 100%;
+  }
+}

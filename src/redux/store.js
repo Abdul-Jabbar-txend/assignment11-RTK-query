@@ -1,30 +1,28 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { persistStore, persistReducer } from "redux-persist";
-import storage from "redux-persist/lib/storage"; // Local storage for persistence
-import { combineReducers } from "redux";
-import { whiteBlackListSlice } from "../redux/slices/whiteBlackListSlice";
-import { weatherApi } from "../redux/weatherApi";
+import storage from "redux-persist/lib/storage";
+import { moviesApi } from "./rtkQuery/moviesApi";
+import movieReducer from "./slice";
 
-// Redux Persist Configuration
+// Persist configuration for redux-persis
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["whiteBlackList"], // Only persist the whiteBlackList slice
+  whitelist: ["movies"],
 };
 
-const rootReducer = combineReducers({
-  whiteBlackList: whiteBlackListSlice.reducer,
-  [weatherApi.reducerPath]: weatherApi.reducer, // Add RTK Query reducer here
-});
+const persistedReducer = persistReducer(persistConfig, movieReducer);
 
-// Persisted Reducer
-const persistedReducer = persistReducer(persistConfig, rootReducer);
-
-// Store Configuration
-export const store = configureStore({
-  reducer: persistedReducer,
+// Create the store with both the persisted movie reducer and RTK Query API reducer
+const store = configureStore({
+  reducer: {
+    movies: persistedReducer,
+    [moviesApi.reducerPath]: moviesApi.reducer,
+  },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(weatherApi.middleware), // Add RTK Query middleware
+    getDefaultMiddleware().concat(moviesApi.middleware),
 });
 
 export const persistor = persistStore(store);
+
+export default store;
